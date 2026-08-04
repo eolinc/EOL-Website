@@ -81,7 +81,8 @@
 <script>
 (function () {
     var FEED_URL = "https://news.yahoo.com/rss/mostviewed";
-    var API = "https://api.rss2json.com/v1/api.json?count=12&rss_url=" + encodeURIComponent(FEED_URL);
+    var RSS2JSON_API = "https://api.rss2json.com/v1/api.json?count=12&rss_url=" + encodeURIComponent(FEED_URL);
+    var ALLORIGINS_API = "https://api.allorigins.win/raw?url=" + encodeURIComponent(FEED_URL);
     var box = document.getElementById("news-box");
 
     function stripHtml(html) {
@@ -116,18 +117,54 @@
             '<a href="' + FEED_URL + '" target="_blank" rel="noopener">View the raw feed</a> instead.</p>';
     }
 
+    // Path 1: rss2json. Its free tier shares a request quota across every
+    // site that uses it with no API key, so it sometimes answers with a
+    // 429 "please use an API key" error even though nothing here is wrong.
+    function tryRss2Json() {
+        return fetch(RSS2JSON_API)
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (data && data.status === "ok" && data.items && data.items.length) {
+                    return data.items.slice(0, 12);
+                }
+                throw new Error("rss2json unavailable");
+            });
+    }
+
+    // Path 2 (fallback): fetch the raw feed through a different CORS proxy
+    // and parse the RSS XML by hand. Used only if Path 1 fails.
+    function tryAllOrigins() {
+        return fetch(ALLORIGINS_API)
+            .then(function (res) { return res.text(); })
+            .then(function (xmlText) {
+                var xml = new DOMParser().parseFromString(xmlText, "text/xml");
+                var nodes = xml.querySelectorAll("item");
+                var items = [];
+                nodes.forEach(function (node) {
+                    var get = function (tag) {
+                        var el = node.querySelector(tag);
+                        return el ? el.textContent : "";
+                    };
+                    items.push({
+                        title: get("title"),
+                        link: get("link"),
+                        pubDate: get("pubDate"),
+                        description: get("description")
+                    });
+                });
+                if (items.length === 0) throw new Error("allorigins unavailable");
+                return items.slice(0, 12);
+            });
+    }
+
     // Plain fetch() works fine here: GitHub Pages / Vercel don't set the
     // restrictive Content-Security-Policy that Neocities' free tier used to
     // (that CSP is what forced the old JSONP workaround on this page).
-    fetch(API)
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-            if (data && data.status === "ok") {
-                render(data.items);
-            } else {
-                throw new Error("feed error");
-            }
-        })
+    // Two independent sources are tried in sequence so a rate limit or
+    // outage on one doesn't take the whole headlines box down.
+    tryRss2Json()
+        .catch(tryAllOrigins)
+        .then(render)
         .catch(showError);
 })();
 </script>
