@@ -1,0 +1,28 @@
+QUESTA CARTELLA E' PER I TUOI GIOCHI FLASH
+============================================
+
+Come aggiungere un gioco a EOL Games:
+
+1. Metti qui dentro il file .swf del gioco, per esempio:
+   games/ilmiogioco.swf
+
+2. Apri games.html, cerca questa riga (vicino alla fine del file):
+
+       var featuredGames = [
+           // { title: "Nome del gioco", file: "games/nomefile.swf" },
+       ];
+
+3. Aggiungi una riga per ogni gioco, cosi':
+
+       var featuredGames = [
+           { title: "Il Mio Gioco", file: "games/ilmiogioco.swf" },
+           { title: "Un Altro Gioco", file: "games/altrogioco.swf" },
+       ];
+
+4. Salva e ricarica la pagina: comparira' un pulsante per ogni gioco
+   sopra il player, pronto per essere cliccato.
+
+Puoi anche non modificare nulla e caricare i giochi al volo dalla
+pagina stessa, usando "Load a .swf from your computer".
+
+Questo file (leggimi.txt) puoi cancellarlo, e' solo una guida.
