@@ -50,9 +50,13 @@
         </div>
 
         <p style="font-size:11px; color:#555; margin-top:14px;">
-            Feed source: <a href="https://feeds.npr.org/1001/rss.xml" target="_blank" rel="noopener">NPR News</a>,
+            Feed source: <a href="https://news.yahoo.com/rss/mostviewed" target="_blank" rel="noopener">Yahoo News</a>,
             fetched live via the <a href="https://rss2json.com" target="_blank" rel="noopener">rss2json</a> service.
             Headlines, summaries and links belong to their original publisher &mdash; EOL Inc. only displays them.
+        </p>
+        <p style="font-size:10px; color:#777;">
+            Note: Yahoo and AOL shared an owner (Apollo/Verizon Media) from 2021 until early 2026, when AOL was
+            sold separately to Bending Spoons &mdash; the two brands are no longer under the same company.
         </p>
 
     </td>
@@ -76,7 +80,8 @@
 
 <script>
 (function () {
-    var FEED_URL = "https://feeds.npr.org/1001/rss.xml";
+    var FEED_URL = "https://news.yahoo.com/rss/mostviewed";
+    var API = "https://api.rss2json.com/v1/api.json?count=12&rss_url=" + encodeURIComponent(FEED_URL);
     var box = document.getElementById("news-box");
 
     function stripHtml(html) {
@@ -111,21 +116,19 @@
             '<a href="' + FEED_URL + '" target="_blank" rel="noopener">View the raw feed</a> instead.</p>';
     }
 
-    // Uses JSONP (a <script> tag) instead of fetch()/XHR: Neocities free
-    // hosting blocks fetch requests to other domains via its Content
-    // Security Policy, but external <script> tags are not blocked.
-    window.eolNewsCallback = function (data) {
-        if (data && data.status === "ok") {
-            render(data.items);
-        } else {
-            showError();
-        }
-    };
-
-    var jsonpScript = document.createElement("script");
-    jsonpScript.src = "https://api.rss2json.com/v1/api.json?count=12&callback=eolNewsCallback&rss_url=" + encodeURIComponent(FEED_URL);
-    jsonpScript.onerror = showError;
-    document.body.appendChild(jsonpScript);
+    // Plain fetch() works fine here: GitHub Pages / Vercel don't set the
+    // restrictive Content-Security-Policy that Neocities' free tier used to
+    // (that CSP is what forced the old JSONP workaround on this page).
+    fetch(API)
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (data && data.status === "ok") {
+                render(data.items);
+            } else {
+                throw new Error("feed error");
+            }
+        })
+        .catch(showError);
 })();
 </script>
 
