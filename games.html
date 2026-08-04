@@ -24,9 +24,9 @@
         <a href="https://dsc.gg/eolinc" target="_blank" rel="noopener" class="nav-button discord-btn">JOIN OUR DISCORD</a>
 
         <div class="try-box">
-            <div class="headline">FLASH</div>
-            Powered by Ruffle
-            <br>No plugin needed
+            <div class="headline">GAMES</div>
+            Play instantly
+            <br>No download needed
         </div>
 
         <div class="sidebar-links">
@@ -39,7 +39,7 @@
     <td class="main" style="width:100%;">
 
         <h1 class="pagehead">EOL Games <span class="subtitle">Flash Arcade</span></h1>
-        <div class="dateline">EOL.COM &mdash; Powered by Ruffle</div>
+        <div class="dateline">EOL.COM &mdash; Games Library</div>
 
         <div class="bullet-item"><span class="dot">&bull;</span> Adobe Flash Player was discontinued, so these games now run on <a href="https://ooooooooo.ooo/" target="_blank" rel="noopener">9o3o</a>, a web player built on the <a href="https://flashpointarchive.org/" target="_blank" rel="noopener">Flashpoint Archive</a> preservation project.</div>
         <div class="bullet-item"><span class="dot">&bull;</span> Click a title below to open and play it directly &mdash; no download, no plugin.</div>
@@ -80,16 +80,10 @@
             <a href="https://ooooooooo.ooo/?id=c85ff4e3-1e2d-4b4e-8c4f-958d9db4aff2" target="_blank" rel="noopener" class="game-btn">Age of War</a>
         </div>
 
-        <div class="loader-box" style="margin-top:16px;">
-            <label>Got your own .swf file with permission to use it?</label><br>
-            <span style="font-size:11px;">Load it straight into the built-in player below &mdash; no upload to this site needed, it plays right from your computer.</span>
-            <br><br>
-            <input type="file" id="swf-file" accept=".swf">
-            <div id="ruffle-inline-wrap" style="display:none; margin-top:10px;">
-                <div class="ruffle-window">
-                    <div class="ruffle-titlebar">EOL Games &mdash; Ruffle Player</div>
-                    <div id="ruffle-container" class="ruffle-frame"></div>
-                </div>
+        <div class="messages-box" style="margin-top:16px;">
+            <div class="msg-item" style="margin-bottom:0;">
+                This is only the launch lineup. New titles get added to the collection over
+                time, one release at a time &mdash; so check back now and then to see what's new.
             </div>
         </div>
 
@@ -121,47 +115,6 @@
     Not affiliated with, endorsed by, or connected to America Online, Inc. / AOL Inc. in any way.
     Ruffle is an independent open-source project and is not affiliated with EOL Inc.
 </div>
-
-<!--
-    NEOCITIES NOTE: this page loads Ruffle from the unpkg.com CDN below. On some
-    Neocities accounts, the Content-Security-Policy blocks Ruffle's WebAssembly
-    file from loading from an outside domain (the same reason the RSS feed on
-    the My News page needed a workaround). If the player below stays stuck on
-    "Loading..." forever once this is live on Neocities, self-host Ruffle instead:
-
-    1. Go to https://ruffle.rs/downloads and download the "Self Hosted" package.
-    2. Unzip it and upload the whole folder to your Neocities site, e.g. as /ruffle/.
-    3. Replace the script tag below with:
-       <script src="ruffle/ruffle.js"></script>
-    (a same-domain file isn't blocked by the CSP, same fix as the JSONP one).
--->
-<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-<script>
-(function () {
-    window.RufflePlayer = window.RufflePlayer || {};
-
-    function createPlayer() {
-        var ruffle = window.RufflePlayer.newest();
-        var player = ruffle.createPlayer();
-        player.style.width = "100%";
-        player.style.height = "480px";
-        var container = document.getElementById("ruffle-container");
-        container.innerHTML = "";
-        container.appendChild(player);
-        document.getElementById("ruffle-inline-wrap").style.display = "block";
-        return player;
-    }
-
-    document.getElementById("swf-file").addEventListener("change", function (e) {
-        var file = e.target.files && e.target.files[0];
-        if (!file) return;
-        var objectUrl = URL.createObjectURL(file);
-        var player = createPlayer();
-        player.load(objectUrl);
-        document.getElementById("ruffle-inline-wrap").scrollIntoView({ behavior: "auto" });
-    });
-})();
-</script>
 
 </body>
 </html>
