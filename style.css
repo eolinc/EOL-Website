@@ -400,19 +400,75 @@ table.channels .chan-sub {
     display: block;
     margin: 3px 0;
 }
-.game-btn {
-    display: inline-block;
-    background-color: #003399;
-    color: #FFFFFF !important;
-    text-decoration: none !important;
-    font-weight: bold;
-    font-size: 11px;
-    padding: 6px 10px;
-    margin: 3px 6px 3px 0;
-    border: 2px outset #6688CC;
+.game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 10px 0 20px 0;
 }
-.game-btn:hover {
-    background-color: #002266;
+.game-card {
+    display: block;
+    width: 140px;
+    text-decoration: none !important;
+    border: 2px outset #C0C0C0;
+    background-color: #F0F0F0;
+    padding: 4px;
+    text-align: center;
+}
+.game-card:hover {
+    border-style: inset;
+    background-color: #E0E0E0;
+}
+.game-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #666666;
+}
+.game-card span {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #003399 !important;
+    margin-top: 4px;
+    line-height: 1.3;
+}
+
+/* ===== EOL CARDS PAGE ===== */
+.cards-banner {
+    background-color: #0A1E4D;
+    border: 2px outset #6688CC;
+    padding: 18px 16px;
+    margin: 10px 0 16px 0;
+}
+.cards-banner h2 {
+    color: #FFFFFF;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    margin: 0 0 14px 0;
+}
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.card-tile {
+    display: block;
+    width: 150px;
+    text-decoration: none !important;
+}
+.card-tile img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 2px outset #C0C0C0;
+}
+.card-tile.locked img {
+    opacity: 0.85;
+    cursor: default;
+}
+.card-tile:not(.locked):hover img {
+    border-style: inset;
 }
 
 /* ===== AIM DOWNLOAD PAGE ===== */
