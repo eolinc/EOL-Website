@@ -1,0 +1,47 @@
+QUESTA CARTELLA CONTIENE LE IMMAGINI DEI GIOCHI
+==================================================
+
+Ogni gioco in games.html mostra un'immagine sopra il titolo. Per ora ci sono
+delle icone placeholder generate automaticamente (colori diversi per
+categoria + iniziali del gioco). Puoi sostituirle con le tue immagini in
+qualsiasi momento.
+
+COME SOSTITUIRE UN'IMMAGINE:
+1. Prepara la tua immagine (consigliato: circa 200x150 pixel, formato .png
+   o .jpg - se usi .jpg ricordati di cambiare anche l'estensione nel file
+   games.html, cercando il nome del file corrispondente).
+2. Rinominala ESATTAMENTE come il file che vuoi sostituire (vedi elenco
+   sotto) e caricala qui dentro, sovrascrivendo quella vecchia.
+3. Fatto: non serve modificare nient'altro, games.html la userà subito.
+
+ELENCO FILE (nome file -> gioco):
+
+ARCADE / ACTION
+  fancy-pants-adventure.png   -> Fancy Pants Adventure
+  helicopter-game.png         -> Helicopter Game
+  raiden-x.png                -> Raiden X
+  commando-2.png              -> Commando 2
+  thing-thing.png             -> Thing Thing
+
+PUZZLE
+  the-impossible-quiz.png     -> The Impossible Quiz
+  bloons.png                  -> Bloons
+  bloxorz.png                 -> Bloxorz
+  fireboy-and-watergirl.png   -> Fireboy and Watergirl
+  worlds-hardest-game.png     -> World's Hardest Game
+
+RACING / SPORTS
+  action-driving-game.png     -> Action Driving Game
+  earn-to-die.png             -> Earn to Die
+  moto-x3m.png                -> Moto X3M
+  tennis-game.png             -> Tennis Game
+  basketball-legends.png      -> Basketball Legends
+
+FAMOUS CASUAL GAMES
+  learn-to-fly.png            -> Learn to Fly
+  duck-life.png                -> Duck Life
+  papas-pizzeria.png          -> Papa's Pizzeria
+  desktop-tower-defense.png   -> Desktop Tower Defense
+  age-of-war.png              -> Age of War
+
+Questo file (leggimi.txt) puoi cancellarlo, e' solo una guida.
