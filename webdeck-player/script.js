@@ -26,7 +26,7 @@
 // YouTube. Prendi l'ID dalla URL dopo "list=", es:
 // https://www.youtube.com/playlist?list=QUESTO_E_L_ID
 var myPlaylists = {
-    "EOL PLAYLIST": 'PL7DA3D097D6FDBC02',
+    "EOL PLAYLIST": 'INSERISCI_QUI_ID_PLAYLIST',
     //"ANOTHER PLAYLIST": 'PLZyqOyXxaVETqpHhT_c5GPmAPzhJpJ5K7',
 };
 
